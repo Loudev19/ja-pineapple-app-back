@@ -16,8 +16,46 @@ mvn spring-boot:run
 
 ## Available endpoints
 
+### Auth
+Sign up endpoint and example
+
 ```bash
 # Auth
 POST /api/auth/signup # Sign up user
+{
+    "username": "John",
+    "password": "123456",
+    "name": "John",
+    "surname": "Doe",
+    "email": "john@gmail.com",
+    "role": ["admin"]
+}
+```
+
+Sign in endpoint and example
+
+```bash
+# Auth
 POST /api/auth/signin # Login user
+{
+    "username": "John",
+    "password": "123456"
+}
+```
+### User
+```bash
+GET /api/users/{IdUser} # Get a single 
+PUT /api/users/{IdUser} # Update
+DELETE /api/users/{IdUser} # Delete
+GET /api/users # Get all
+```
+
+
+### Products
+```bash
+POST /api/product # Create
+GET /api/product/{IdProduct} # Get a single 
+PUT /api/product/{IdProduct} # Update
+DELETE /api/product/{IdProduct} # Delete
+GET /api/product # Get all
 ```
