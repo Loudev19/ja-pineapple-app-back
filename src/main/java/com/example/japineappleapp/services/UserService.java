@@ -34,6 +34,10 @@ public class UserService {
     public Optional<User> findById(Integer id){
         return dao.findById(id);
     }
+    
+    public Optional<User> findByEmail(String email) {
+    	return dao.findByEmail(email);
+    }
 
     public List<User> findAll(){ return dao.findAll();}
 
