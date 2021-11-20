@@ -44,7 +44,7 @@ POST /api/auth/signin # Login user
 ```
 ### Forgot password
 ```bash
-GET /api/users/{email} # Search a user by email and return email 
+GET /api/users/{email} # Search a user by email and return user 
 ```
 
 ### User
