@@ -45,6 +45,9 @@ public class JaPineappleAppApplication {
 			Role userRole = new Role();
 			userRole.setName(ERole.ROLE_USER);
 			roleRepository.save(userRole);
+			
+			Set<Role> roles = new HashSet<Role>();
+			roles.add(adminRole);
 
 			User _user = new User(); 
 			_user.setName("John");
@@ -52,6 +55,7 @@ public class JaPineappleAppApplication {
             _user.setEmail("john@gmail.com");
             _user.setUsername("john");
             _user.setPassword(encoder.encode("123456"));
+            _user.setRoles(roles);
 
 			userRepository.save(_user);
 		}

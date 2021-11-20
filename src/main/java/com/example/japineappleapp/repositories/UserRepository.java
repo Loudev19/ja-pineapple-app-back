@@ -12,7 +12,5 @@ import com.example.japineappleapp.models.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 	Optional<User> findByUsername(String username);
     Boolean existsByUsername(String username);
-    
-    @Query("SELECT c FROM user c WHERE c.email = ?1")
-	Optional<User> findByEmail(String email);
+   	Optional<User> findByEmail(String email);
 }

@@ -22,7 +22,7 @@ public class UserController {
 	@Autowired
     private UserService userService;
 
-	@GetMapping("/forgot_password")
+	@GetMapping("/forgot_password/{email}")
     public ResponseEntity<User> forgotPassword(@PathVariable(value="email") String email) {
 		Optional<User> user = userService.findByEmail(email);
         if(user.isPresent()) {
