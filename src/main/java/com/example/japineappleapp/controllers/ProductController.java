@@ -24,7 +24,7 @@ import com.example.japineappleapp.repositories.ProductRepository;
 public class ProductController {
 	@Autowired
     private ProductRepository productRepository;
-
+	
     @PostMapping("/product")
     public ResponseEntity<Product> crearProduct(@RequestBody Product product) {
         try {

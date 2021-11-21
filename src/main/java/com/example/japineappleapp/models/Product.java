@@ -21,7 +21,14 @@ public class Product {
     private long quantity;
     private float unitPrice;
     
-
+    public Product(String name, Category category, String description, long quantity, float unitPrice) {
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.category = category;
+    }
+    
     public long getId() {
         return this.id;
     }
