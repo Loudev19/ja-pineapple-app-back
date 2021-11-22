@@ -1,9 +1,42 @@
 package com.example.japineappleapp.models;
 
-public enum Category {
-	CATEGORY_BEVERAGE,
-    CATEGORY_MEAT,
-    CATEGORY_BAKERY,
-    CATEGORY_PRODUCE, //FRUITS AND VEGETABLES
-    CATEGORY_PERSONAL_CARE,
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "categories")
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(length = 20)
+    private String name;
+
+    public Category() {}
+
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
