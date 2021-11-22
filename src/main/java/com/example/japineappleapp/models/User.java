@@ -10,41 +10,45 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     @NotBlank
-    @Column(unique = true)
+    @Column(unique = true, columnDefinition = "text")
     private String username;
 
     @NotBlank
     @Size(max = 200)
+    @Column(columnDefinition="text")
     private String password;
     
     @NotBlank
     @Email
     @Size(max = 200)
-    @Column(unique = true)
+    @Column(unique = true, columnDefinition = "text")
     private String email;
     
     @NotBlank
     @Size(max = 200)
+    @Column(columnDefinition="text")
     private String name;
     
     @NotBlank
     @Size(max = 200)
+    @Column(columnDefinition="text")
     private String surname;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(	name = "users_role",
+            joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+
     }
 
     public User(String username, String password) {
