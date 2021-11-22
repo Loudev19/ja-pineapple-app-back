@@ -9,10 +9,11 @@ mvn package
 ```
 
 ## Run locally
-Before run locally, create a mariadb database with info specified in file /resources/application.properties. You can follow the next tutorial [How to create mariadb user](https://phoenixnap.com/kb/how-to-create-mariadb-user-grant-privileges).
+Before run locally, create a postgres database with info specified in file /resources/application-dev.properties, change /resources/application.properties "prod" key by "dev" key. Then you should be able to run app locally.
 ```bash
 mvn spring-boot:run
 ```
+API was published using Heroku on the next link https://ja-pineapple-app.herokuapp.com/
 
 ## Available endpoints
 
