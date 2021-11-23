@@ -16,12 +16,12 @@ public class Product {
 
     @Column(unique=true)
     private String name;
-    private Category category;
+    private String category;
     private String description;
     private long quantity;
     private float unitPrice;
     
-    public Product(String name, Category category, String description, long quantity, float unitPrice) {
+    public Product(String name, String category, String description, long quantity, float unitPrice) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
@@ -61,11 +61,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return this.category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
