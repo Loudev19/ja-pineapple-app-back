@@ -14,9 +14,11 @@ import org.springframework.stereotype.Component;
 import com.example.japineappleapp.models.Category;
 import com.example.japineappleapp.models.ECategory;
 import com.example.japineappleapp.models.ERole;
+import com.example.japineappleapp.models.Product;
 import com.example.japineappleapp.models.Role;
 import com.example.japineappleapp.models.User;
 import com.example.japineappleapp.repositories.CategoryRepository;
+import com.example.japineappleapp.repositories.ProductRepository;
 import com.example.japineappleapp.repositories.RoleRepository;
 import com.example.japineappleapp.repositories.UserRepository;
 
@@ -37,6 +39,9 @@ public class JaPineappleAppApplication {
 		private CategoryRepository categoryRepository;
 
 		@Autowired
+		private ProductRepository productRepository;
+
+		@Autowired
 		private UserRepository userRepository;
 		
 	    @Autowired
@@ -51,15 +56,6 @@ public class JaPineappleAppApplication {
 			Role userRole = new Role();
 			userRole.setName(ERole.ROLE_USER);
 			roleRepository.save(userRole);
-
-			/*
-			CATEGORY_BEVERAGE,
-			CATEGORY_MEAT,
-			CATEGORY_BAKERY,
-			CATEGORY_PRODUCE, //FRUITS AND VEGETABLES
-			CATEGORY_PERSONAL_CARE,
-			CATEGORY_EMPTY
-			*/
 
 			Category beverageCategory = new Category();
 			beverageCategory.setName("Bebida");
@@ -84,6 +80,15 @@ public class JaPineappleAppApplication {
 			Category noneCategory = new Category();
 			noneCategory.setName("Ninguno");
 			categoryRepository.save(noneCategory);
+
+			Product cocaProduct = new Product(
+				"Coc Cola", 
+				"Bebida", 
+				"Bebida gaseosa", 
+				10, 
+				5.5f
+			);
+			productRepository.save(cocaProduct);
 			
 			Set<Role> roles = new HashSet<Role>();
 			roles.add(adminRole);

@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="product")
+@Table(name="products")
 public class Product {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private Integer id;
 
     @Column(unique=true)
     private String name;
@@ -20,6 +20,8 @@ public class Product {
     private String description;
     private long quantity;
     private float unitPrice;
+
+    public Product() {}
     
     public Product(String name, String category, String description, long quantity, float unitPrice) {
         this.name = name;
@@ -29,11 +31,11 @@ public class Product {
         this.category = category;
     }
     
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
