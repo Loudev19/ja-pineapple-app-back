@@ -112,4 +112,16 @@ public class AuthController {
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
+    @PutMapping("/reset_password/{id}")
+    public ResponseEntity<User> actualizaUserPassword(@PathVariable("id") Integer id, @RequestBody String newPassword) {
+    	Optional<User> userData = userService.findById(id);
+        if(userData.isPresent()) {
+            User _user = userData.get();
+            _user.setPassword(encoder.encode(newPassword));
+            return new ResponseEntity<User>(userService.save(_user), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

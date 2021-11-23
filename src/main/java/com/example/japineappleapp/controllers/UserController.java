@@ -19,6 +19,8 @@ import com.example.japineappleapp.payload.request.SignupRequest;
 import com.example.japineappleapp.services.UserService;
 import com.example.japineappleapp.services.RoleService;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -30,6 +32,9 @@ public class UserController {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    PasswordEncoder encoder;
 
 	@GetMapping("/forgot_password/{email}")
     public ResponseEntity<User> forgotPassword(@PathVariable(value="email") String email) {
@@ -75,7 +80,6 @@ public class UserController {
             _user.setSurname(user.getSurname());
             _user.setEmail(user.getEmail());
             _user.setUsername(user.getUsername());
-            _user.setPassword(user.getPassword());
 
             Set<String> strRoles = user.getRole();
             Set<Role> roles = new HashSet<>();
