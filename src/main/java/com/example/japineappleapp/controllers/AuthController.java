@@ -11,6 +11,7 @@ import com.example.japineappleapp.services.RoleService;
 import com.example.japineappleapp.services.UserService;
 import com.example.japineappleapp.services.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -68,11 +69,9 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<User> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userService.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Error: Usuario ya existente!");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         // Create new user's account
@@ -110,9 +109,7 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        userService.save(user);
-
-        return ResponseEntity.ok("Usuario Registrado!");
+        return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
 }
