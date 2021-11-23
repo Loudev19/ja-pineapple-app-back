@@ -19,30 +19,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.japineappleapp.models.Product;
 import com.example.japineappleapp.repositories.ProductRepository;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
+
 public class ProductController {
 	@Autowired
     private ProductRepository productRepository;
 	
-    @PostMapping("/product")
+    @PostMapping("/products")
     public ResponseEntity<Product> crearProduct(@RequestBody Product product) {
         try {
             Product _product = productRepository.save(product);
-            return new ResponseEntity<>(_product, HttpStatus.CREATED);
+            return new ResponseEntity<Product>(_product, HttpStatus.OK);
         } catch(Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/product")
+    @GetMapping("/products")
     public ResponseEntity<List<Product>> listaProducts() {
         try {
             List<Product> products = new ArrayList<Product>();
             productRepository.findAll().forEach(products::add);
             if(products.isEmpty()) {
-                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(products, HttpStatus.OK);
         } catch(Exception e) {
@@ -50,8 +52,8 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/product/{id}")
-    public ResponseEntity<Product> consultaProduct(@PathVariable(value="id") long id) {
+    @GetMapping("/products/{id}")
+    public ResponseEntity<Product> consultaProduct(@PathVariable(value="id") Integer id) {
         Optional<Product> productData = productRepository.findById(id);
         if(productData.isPresent()) {
             return new ResponseEntity<>(productData.get(), HttpStatus.OK);
@@ -60,8 +62,8 @@ public class ProductController {
         }
     }
 
-    @PutMapping("/product/{id}")
-    public ResponseEntity<Product> actualizaProduct(@PathVariable("id") long id, @RequestBody Product product) {
+    @PutMapping("/products/{id}")
+    public ResponseEntity<Product> actualizaProduct(@PathVariable("id") Integer id, @RequestBody Product product) {
         Optional<Product> productData = productRepository.findById(id);
 
         if(productData.isPresent()) {
@@ -73,16 +75,16 @@ public class ProductController {
             _product.setUnitPrice(product.getUnitPrice());
             return new ResponseEntity<>(productRepository.save(_product), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
 
-    @DeleteMapping("/product/{id}")
-    public ResponseEntity<HttpStatus> eliminaLibro(@PathVariable(value="id") long id) {
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<HttpStatus> eliminaProduct(@PathVariable(value="id") Integer id) {
         try {
             productRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
